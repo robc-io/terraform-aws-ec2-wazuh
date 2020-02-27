@@ -1,0 +1,10 @@
+
+cluster.name: elasticsearch
+node.name: {{ public_ip }}
+
+#################################### Paths ####################################
+# Path to directory containing configuration (this file and logging.yml):
+
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+action.auto_create_index: true

@@ -1,4 +1,4 @@
-# terraform-aws-wazuh
+# terraform-aws-wazuh-server
 
 ## Features
 
@@ -12,13 +12,13 @@ For Terraform v0.12.0+
 
 ```
 module "this" {
-    source = "github.com/robc-io/terraform-aws-wazuh"
+    source = "github.com/robc-io/terraform-aws-wazuh-server"
 
 }
 ```
 ## Examples
 
-- [defaults](https://github.com/robc-io/terraform-aws-wazuh/tree/master/examples/defaults)
+- [defaults](https://github.com/robc-io/terraform-aws-wazuh-server/tree/master/examples/defaults)
 
 ## Known  Issues
 No issue is creating limit on this module.
@@ -26,15 +26,35 @@ No issue is creating limit on this module.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| aws | n/a |
+| random | n/a |
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:-----:|
+| eip\_id | The elastic ip id to attach to active instance | `string` | `""` | no |
+| environment | The environment | `string` | `""` | no |
+| instance\_type | Instance type | `string` | `"t2.micro"` | no |
+| key\_name | The key pair to import | `string` | `""` | no |
+| monitoring | Boolean for cloudwatch | `bool` | `false` | no |
+| namespace | The namespace to deploy into | `string` | `""` | no |
+| network\_name | The network name, ie kusama / mainnet | `string` | `""` | no |
+| owner | Owner of the infrastructure | `string` | `""` | no |
+| private\_key\_path | The path to the private ssh key | `string` | n/a | yes |
+| public\_key\_path | The path to the public ssh key | `string` | n/a | yes |
+| root\_volume\_size | Root volume size | `string` | `0` | no |
+| stage | The stage of the deployment | `string` | `""` | no |
+| subnet\_id | The id of the subnet | `string` | n/a | yes |
+| vpc\_security\_group\_ids | List of security groups | `list(string)` | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| public\_ip | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

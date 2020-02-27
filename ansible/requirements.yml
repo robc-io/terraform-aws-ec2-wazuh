@@ -1,0 +1,11 @@
+roles:
+  - src: dev-sec.os-hardening
+    version: 5.2.1
+  - src: dev-sec.ssh-hardening
+    version: 7.0.0
+  - src: elastic.elasticsearch
+    version: 7.6.0
+  - src: elastic.beats
+    version: 7.6.0
+  - src: geerlingguy.kibana
+    version: 4.0.1

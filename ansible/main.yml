@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  roles:
+#    - dependencies
+    - { role: "dev-sec.os-hardening", when: (ansible_hardening | default(false) ) }
+    - { role: "dev-sec.ssh-hardening", when: (ansible_hardening | default(false) ) }
+    - elastic.elasticsearch
+    - elastic.beats
+    - geerlingguy.kibana
+    - wazuh-manager
+  vars:
+    wazuh_manager_version: "3.11.2-1"
+    beat: filebeat

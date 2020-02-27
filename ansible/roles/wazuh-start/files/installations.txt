@@ -1,0 +1,43 @@
+# Install Python 3
+
+yum install python3
+
+# To enable Wazuh services:
+systemctl daemon-reload
+systemctl enable wazuh-manager.service
+systemctl restart wazuh-manager.service
+systemctl status -l  wazuh-manager.service
+
+# Install Wazuh API
+curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+sudo yum install gcc-c++ make
+sudo yum install -y nodejs
+
+curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+sudo yum install yarn
+
+curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.11.1/install_api.sh && bash ./install_api.sh download
+
+# Allow Wazuh services through the firewall
+firewall-cmd --permanent --add-port=55000/tcp
+firewall-cmd --reload
+
+# Enable services
+systemctl enable wazuh-api.service
+systemctl restart wazuh-api.service
+systemctl status -l wazuh-api.service
+
+# Install filebeat
+yum install filebeat
+
+# Download Wazuh module for filebeat
+curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
+# Install Elasticsearch
+yum install elasticsearch
+
+# Install Kibana
+yum install kibana
+
+# Install Wazuh App plugin for kibana
+sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.1_7.5.1.zip
