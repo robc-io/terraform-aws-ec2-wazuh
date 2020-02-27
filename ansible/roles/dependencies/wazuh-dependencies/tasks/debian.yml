@@ -1,0 +1,35 @@
+---
+
+- name: check if running on cloud
+  stat:
+    path: /var/lib/cloud
+  register: cloud
+
+- name: Wait for updates / upgrades from user data script to release lock
+  script: wait-for-apt-on-startup.sh
+  when: cloud.stat.exists
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    update_cache: yes
+    upgrade: "yes" # Needs to be quoted
+    force_apt_get: yes
+    cache_valid_time: 86400 #One day
+
+- name: Install required packages
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: yes
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+      - software-properties-common
+      - apt-transport-https
+      - ca-certificates
+      - gnupg-agent
+      - linux-aws
+      - awscli
+      - curl
+      - jq

@@ -1,0 +1,19 @@
+---
+
+- name: Include debian installs
+  include_tasks: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Register file
+  stat: path=/etc/security/limits.d/10.hardcore.conf
+  register: hclimit
+
+
+- name: "Create hard core limit file"
+  file:
+    path: /etc/security/limits.d/10.hardcore.conf
+    mode: '0644'
+    state: touch
+    owner: root
+    group: root
+  when: not hclimit.stat.exists
