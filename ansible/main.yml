@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   roles:
-#    - dependencies
+    - dependencies
     - { role: "dev-sec.os-hardening", when: (ansible_hardening | default(false) ) }
     - { role: "dev-sec.ssh-hardening", when: (ansible_hardening | default(false) ) }
     - elastic.elasticsearch
