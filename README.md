@@ -37,7 +37,7 @@ No issue is creating limit on this module.
 |------|-------------|------|---------|:-----:|
 | eip\_id | The elastic ip id to attach to active instance | `string` | `""` | no |
 | environment | The environment | `string` | `""` | no |
-| instance\_type | Instance type | `string` | `"t2.micro"` | no |
+| instance\_type | Instance type | `string` | `"t2.large"` | no |
 | key\_name | The key pair to import | `string` | `""` | no |
 | monitoring | Boolean for cloudwatch | `bool` | `false` | no |
 | namespace | The namespace to deploy into | `string` | `""` | no |
@@ -45,7 +45,7 @@ No issue is creating limit on this module.
 | owner | Owner of the infrastructure | `string` | `""` | no |
 | private\_key\_path | The path to the private ssh key | `string` | n/a | yes |
 | public\_key\_path | The path to the public ssh key | `string` | n/a | yes |
-| root\_volume\_size | Root volume size | `string` | `0` | no |
+| root\_volume\_size | Root volume size | `string` | `8` | no |
 | stage | The stage of the deployment | `string` | `""` | no |
 | subnet\_id | The id of the subnet | `string` | n/a | yes |
 | vpc\_security\_group\_ids | List of security groups | `list(string)` | n/a | yes |

@@ -9,3 +9,5 @@ roles:
     version: 7.6.0
   - src: geerlingguy.kibana
     version: 4.0.1
+  - src: nginxinc.nginx
+    version: 0.13.0

@@ -7,4 +7,3 @@ node.name: {{ public_ip }}
 
 path.data: /var/lib/elasticsearch
 path.logs: /var/log/elasticsearch
-action.auto_create_index: true

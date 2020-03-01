@@ -29,6 +29,8 @@
       - apt-transport-https
       - ca-certificates
       - gnupg-agent
+      - python3
+      - python3-pip
       - linux-aws
       - awscli
       - curl

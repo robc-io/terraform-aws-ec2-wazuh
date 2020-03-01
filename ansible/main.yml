@@ -10,5 +10,68 @@
     - geerlingguy.kibana
     - wazuh-manager
   vars:
+
     wazuh_manager_version: "3.11.2-1"
+
+    #
+    # elasticsearch
+    #
+    #    es_version: 7.6.0
+    es_action_auto_create_index: true
+    es_data_dirs:
+      - "/opt/elasticsearch/data"
+    es_log_dir: "/opt/elasticsearch/logs"
+    es_config:
+      node.name: "0.0.0.0"
+      cluster.name: "wazuh"
+      #      discovery.seed_hosts: "localhost:9301"
+      #      path.data: /var/lib/elasticsearch
+      #      path.logs: /var/log/elasticsearch
+      #      action.auto_create_index: true
+      #      http.port: 9201
+      #      transport.port: 9301
+      node.data: false
+      node.master: true
+      bootstrap.memory_lock: true
+    es_heap_size: 1g
+    es_api_port: 9200
+
+    #
+    # kibana
+    #
+#    kibana_version: "7.5.2"
+#    kibana_version: "7.6.0"
+    kibana_server_port: 5601
+    kibana_server_host: "0.0.0.0"
+    kibana_elasticsearch_url: "http://localhost:9200"
+    kibana_elasticsearch_username: ""
+    kibana_elasticsearch_password: ""
+
+    #
+    # beats
+    #
     beat: filebeat
+    beats_version: 7.6.0
+    beat_conf:
+      filebeat:
+        inputs:
+          - type: log
+            enabled: true
+            paths:
+              - /var/log/*.log
+      # Wazuh - Filebeat configuration file
+      filebeat.modules:
+        - module: wazuh
+          alerts:
+            enabled: true
+          archives:
+            enabled: false
+
+      setup.template.json.enabled: true
+      setup.template.json.path: '/etc/filebeat/wazuh-template.json'
+      setup.template.json.name: 'wazuh'
+      setup.template.overwrite: true
+      setup.ilm.enabled: false
+
+      output.elasticsearch.hosts: ['http://0.0.0.0:9200']
+
